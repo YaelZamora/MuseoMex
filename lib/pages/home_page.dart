@@ -36,9 +36,9 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             onPressed: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (BuildContext context) {
-                return FavoritosPage();
-              }),
+              MaterialPageRoute(
+                builder: (BuildContext context) => FavoritosPage(),
+              ),
             ),
             icon: Icon(
               Icons.favorite,

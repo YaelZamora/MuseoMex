@@ -1,5 +1,6 @@
 import 'package:day21/lists/costos.dart';
 import 'package:day21/lists/imagen.dart';
+import 'package:day21/lists/lat_long_list.dart';
 import 'package:day21/lists/nombre_museos.dart';
 import 'package:day21/pages/info_page.dart';
 import 'package:day21/widgets/item.dart';
@@ -14,10 +15,9 @@ class MuseosTab extends StatefulWidget {
 }
 
 class _MuseosTabState extends State<MuseosTab> {
-  final List<String> _imagen = imagen;
-
   final Map<String, String> _nombre = museos;
 
+  final List<String> _imagen = imagen;
   final List<double> _costo = costos;
 
   @override

@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.technologyfantasy.museomex">
+    <uses-permission android:name="android.permission,INTERNET"/>
    <application
         android:label="MuseoMex"
         android:icon="@mipmap/launcher_icon">
