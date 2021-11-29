@@ -3,6 +3,7 @@ import 'package:day21/lists/imagen.dart';
 import 'package:day21/lists/info_complemento.dart';
 import 'package:day21/lists/lat_long_list.dart';
 import 'package:day21/lists/nombre_museos.dart';
+import 'package:day21/pages/mapa_page.dart';
 import 'package:day21/src/styles/textstyle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -90,9 +91,10 @@ class _InfoPageState extends State<InfoPage> {
                   const SizedBox(
                     height: 20,
                   ),
-                  SizedBox(
+                  Container(
+                    color: Colors.grey.shade100,
                     width: size.width,
-                    height: 350,
+                    height: 300,
                     child: SingleChildScrollView(
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -108,43 +110,31 @@ class _InfoPageState extends State<InfoPage> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 350,
-                    width: 300,
-                    child: FlutterMap(
-                      options: MapOptions(
-                        center: latLng.LatLng(19.34, -99.19
-                            //_location.keys.elementAt(widget.posicion),
-                            //_location.values.elementAt(widget.posicion),
-                            ),
-                        zoom: 20,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        'Ubicación',
+                        style: _style.titulo,
                       ),
-                      layers: [
-                        TileLayerOptions(
-                          urlTemplate:
-                              'https://api.mapbox.com/styles/v1/yaelzamora/ckwjzugrz2jy115o0so7ipd1c/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoieWFlbHphbW9yYSIsImEiOiJja3cydDJ4eWgwZmxmMnFtbmswNHJweGE1In0.AUfal4zjfWtOxr6yR_0ELg',
-                          additionalOptions: {
-                            'accesToken':
-                                'pk.eyJ1IjoieWFlbHphbW9yYSIsImEiOiJja3cydDJ4eWgwZmxmMnFtbmswNHJweGE1In0.AUfal4zjfWtOxr6yR_0ELg',
-                            'id': 'mapbox.mapbox-streets-v8',
-                          },
-                        ),
-                        MarkerLayerOptions(
-                          markers: [
-                            Marker(
-                              point: latLng.LatLng(
-                                _location.keys.elementAt(widget.posicion),
-                                _location.values.elementAt(widget.posicion),
-                              ),
-                              builder: (BuildContext context) => const Icon(
-                                Icons.location_on,
-                                color: Colors.white,
-                              ),
+                      IconButton(
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => MapaPage(
+                              latitud:
+                                  _location.keys.elementAt(widget.posicion),
+                              longitud:
+                                  _location.values.elementAt(widget.posicion),
                             ),
-                          ],
+                          ),
                         ),
-                      ],
-                    ),
+                        icon: Icon(
+                          Icons.location_on,
+                          size: 30,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
