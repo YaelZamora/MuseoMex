@@ -3,7 +3,9 @@ import 'package:day21/lists/imagen.dart';
 import 'package:day21/lists/info_complemento.dart';
 import 'package:day21/lists/lat_long_list.dart';
 import 'package:day21/lists/nombre_museos.dart';
+import 'package:day21/lists/sitio_web.dart';
 import 'package:day21/pages/mapa_page.dart';
+import 'package:day21/pages/sitio_web_page.dart';
 import 'package:day21/src/styles/textstyle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -33,6 +35,7 @@ class _InfoPageState extends State<InfoPage> {
   final Map<double, double> _location = latLongLista;
 
   final List<String> _horario = horario;
+  final List<String> _sitio = sitioWebLista;
 
   final _style = Style();
 
@@ -110,29 +113,77 @@ class _InfoPageState extends State<InfoPage> {
                       ),
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  Column(
                     children: [
-                      Text(
-                        'Ubicación',
-                        style: _style.titulo,
-                      ),
-                      IconButton(
-                        onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (BuildContext context) => MapaPage(
-                              latitud:
-                                  _location.keys.elementAt(widget.posicion),
-                              longitud:
-                                  _location.values.elementAt(widget.posicion),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            'Ubicación',
+                            style: _style.titulo,
+                          ),
+                          IconButton(
+                            onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) => MapaPage(
+                                  latitud:
+                                      _location.keys.elementAt(widget.posicion),
+                                  longitud: _location.values
+                                      .elementAt(widget.posicion),
+                                ),
+                              ),
+                            ),
+                            icon: Icon(
+                              Icons.location_on,
+                              size: 30,
                             ),
                           ),
-                        ),
-                        icon: Icon(
-                          Icons.location_on,
-                          size: 30,
-                        ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            'Sitio Web',
+                            style: _style.titulo,
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              if (_sitio.elementAt(widget.posicion) == '') {
+                                final snackBar = SnackBar(
+                                  behavior: SnackBarBehavior.floating,
+                                  content: const Text(
+                                      'No tenemos el sitio disponible'),
+                                  action: SnackBarAction(
+                                    label: 'OK',
+                                    onPressed: () {},
+                                  ),
+                                );
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBar);
+                              } else {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) {
+                                    return WebViewPage(
+                                      sitio: _sitio.elementAt(widget.posicion),
+                                      museo: _nombre.values
+                                          .elementAt(widget.posicion),
+                                    );
+                                  }),
+                                );
+                              }
+                            },
+                            icon: Icon(
+                              (_sitio.elementAt(widget.posicion) == '')
+                                  ? Icons.web_asset_off
+                                  : Icons.web_asset,
+                              size: 30,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

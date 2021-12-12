@@ -34,12 +34,17 @@ class _HomePageState extends State<HomePage> {
         elevation: 0,
         actions: [
           IconButton(
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (BuildContext context) => FavoritosPage(),
-              ),
-            ),
+            onPressed: () {
+              final snackBar = SnackBar(
+                behavior: SnackBarBehavior.floating,
+                content: const Text('Estamos trabajando en esto.'),
+                action: SnackBarAction(
+                  label: 'OK',
+                  onPressed: () {},
+                ),
+              );
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            },
             icon: Icon(
               Icons.favorite,
               color: (_isSelected == true) ? Colors.red : Colors.white,

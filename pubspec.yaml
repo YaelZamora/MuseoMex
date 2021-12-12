@@ -37,6 +37,7 @@ dependencies:
   provider:
   shared_preferences:
   flutter_map:
+  webview_flutter:
 
 
 dev_dependencies:
